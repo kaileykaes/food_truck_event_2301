@@ -39,7 +39,6 @@ RSpec.describe FoodTruck do
   it 'can stock different items' do
     @food_truck.stock(@item1, 30)
     @food_truck.stock(@item1, 25)
-    # require 'pry'; binding.pry
     @food_truck.stock(@item2, 12)
     expect(@food_truck.inventory).to eq({@item1 => 55, @item2 => 12})
   end
