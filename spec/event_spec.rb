@@ -72,10 +72,10 @@ RSpec.describe Event do
     @event.add_food_truck(@food_truck3)
     expect(@event.total_inventory).to be_a(Hash)
     expect(@event.total_inventory).to eq({
-      @item1 => {total: 100, vendors: ["Rocky Mountain Pies", "Palisade Peach Shack"]},
-      @item2 => {total:7, vendors: ["Rocky Mountain Pies"]},
-      @item3 => {total: 25, vendors: ["Ba-Nom-a-Nom"]},
-      @item4 => {total: 50, vendors: ["Ba-Nom-a-Nom"]}
+      @item1 => {total: 100, food_trucks: ["Rocky Mountain Pies", "Palisade Peach Shack"]},
+      @item2 => {total:7, food_trucks: ["Rocky Mountain Pies"]},
+      @item3 => {total: 25, food_trucks: ["Ba-Nom-a-Nom"]},
+      @item4 => {total: 50, food_trucks: ["Ba-Nom-a-Nom"]}
       })
   end 
 
@@ -93,6 +93,6 @@ RSpec.describe Event do
     @event.add_food_truck(@food_truck3)
     require 'pry'; binding.pry
     expect(@event.sorted_item_list).to be_a Array
-    # expect(@event.sorted_item_list).to eq([])
+    expect(@event.sorted_item_list).to eq(["Apple Pie (Slice)", "Banana Nice Cream", "Peach Pie (Slice)", "Peach Pie (Slice)", "Peach-Raspberry Nice Cream"])
   end
 end
