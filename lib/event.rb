@@ -55,11 +55,20 @@ class Event
 
   def sorted_item_list 
     item_names = []
-    @food_trucks.each do |vendor|
-      vendor.inventory.each do |item, value|
+    @food_trucks.each do |food_truck|
+      food_truck.inventory.each do |item, value|
         item_names << item.name
       end
     end
     item_names.sort
+  end
+
+  def sell(item, number)
+    if total_inventory[item][:total] < number
+        false 
+    else food_trucks_that_sell(item).map do |food_truck|
+        require 'pry'; binding.pry
+      end
+    end
   end
 end
