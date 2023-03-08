@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'date'
 RSpec.describe Event do
   before(:each) do
     @event = Event.new("South Pearl Street Farmers Market")
@@ -93,5 +93,38 @@ RSpec.describe Event do
     @event.add_food_truck(@food_truck3)
     expect(@event.sorted_item_list).to be_a Array
     expect(@event.sorted_item_list).to eq(["Apple Pie (Slice)", "Banana Nice Cream", "Peach Pie (Slice)", "Peach Pie (Slice)", "Peach-Raspberry Nice Cream"])
+  end
+
+  it 'has a date' do
+    expect(@event.date).to be_a Date
+  end
+
+  xit 'can sell items' do
+    @event.add_food_truck(@food_truck1)
+    @event.add_food_truck(@food_truck2)
+    @event.add_food_truck(@food_truck3)
+    expect(@event.sell(@item1, 15)).to be True
+    expect(@food_truck1.inventory).to eq({@item1 => 20, @item2 => 7})
+    expect(@event.total_inventory).to eq({
+      @item1 => {total: 85, food_trucks: ["Rocky Mountain Pies", "Palisade Peach Shack"]},
+      @item2 => {total:7, food_trucks: ["Rocky Mountain Pies"]},
+      @item3 => {total: 25, food_trucks: ["Ba-Nom-a-Nom"]},
+      @item4 => {total: 50, food_trucks: ["Ba-Nom-a-Nom"]}
+      })
+    expect(@event.sell(@item2, 30)).to be False
+  end
+
+  xit 'can sell items from multiple trucks' do
+    @event.add_food_truck(@food_truck1)
+    @event.add_food_truck(@food_truck2)
+    @event.add_food_truck(@food_truck3)
+    expect(@event.sell(@item1, 70)).to be True
+    expect(@food_truck1.inventory).to eq({@item1 => 0, @item2 => 7})
+    expect(@event.total_inventory).to eq({
+      @item1 => {total: 30, food_trucks: ["Palisade Peach Shack"]},
+      @item2 => {total:7, food_trucks: ["Rocky Mountain Pies"]},
+      @item3 => {total: 25, food_trucks: ["Ba-Nom-a-Nom"]},
+      @item4 => {total: 50, food_trucks: ["Ba-Nom-a-Nom"]}
+      })
   end
 end
