@@ -79,11 +79,20 @@ RSpec.describe Event do
       })
   end 
 
-  xit 'finds overstocked items' do
+  it 'finds overstocked items' do
     @event.add_food_truck(@food_truck1)
     @event.add_food_truck(@food_truck2)
     @event.add_food_truck(@food_truck3)
     @event.total_inventory
     expect(@event.overstocked_items).to eq([@item1])
+  end
+
+  it 'can create a sorted item list' do
+    @event.add_food_truck(@food_truck1)
+    @event.add_food_truck(@food_truck2)
+    @event.add_food_truck(@food_truck3)
+    require 'pry'; binding.pry
+    expect(@event.sorted_item_list).to be_a Array
+    # expect(@event.sorted_item_list).to eq([])
   end
 end
