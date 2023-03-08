@@ -40,4 +40,12 @@ class Event
     end
     errythang
   end
+
+  def overstocked_items
+    too_many = []
+    total_inventory.each do |item, val|
+      too_many << item if val[:total] > 50 && val[:vendors].length > 1
+    end
+    too_many
+  end
 end
