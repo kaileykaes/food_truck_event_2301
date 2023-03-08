@@ -103,7 +103,7 @@ RSpec.describe Event do
     @event.add_food_truck(@food_truck1)
     @event.add_food_truck(@food_truck2)
     @event.add_food_truck(@food_truck3)
-    expect(@event.sell(@item1, 15)).to eq(True)
+    expect(@event.sell(@item1, 15)).to eq(true)
     expect(@food_truck1.inventory).to eq({@item1 => 20, @item2 => 7})
     expect(@event.total_inventory).to eq({
       @item1 => {total: 85, food_trucks: ["Rocky Mountain Pies", "Palisade Peach Shack"]},
@@ -111,7 +111,7 @@ RSpec.describe Event do
       @item3 => {total: 25, food_trucks: ["Ba-Nom-a-Nom"]},
       @item4 => {total: 50, food_trucks: ["Ba-Nom-a-Nom"]}
       })
-    expect(@event.sell(@item2, 30)).to eq(False)
+    expect(@event.sell(@item2, 30)).to eq(false)
   end
 
   xit 'can sell items from multiple trucks' do
