@@ -29,4 +29,15 @@ class Event
     sellers
   end 
 
+  def total_inventory  
+    errythang = {}
+    food_trucks.map do |food_truck|
+      food_truck.inventory.each do |item, v|
+        errythang[item] = {total: 0, vendors: []} unless errythang.has_key?(item)
+        errythang[item][:total] += food_truck.inventory[item]
+        errythang[item][:vendors] << food_truck.name unless errythang[item].has_key?(food_truck) 
+      end
+    end
+    errythang
+  end
 end
