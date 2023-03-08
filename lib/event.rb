@@ -33,9 +33,9 @@ class Event
     errythang = {}
     food_trucks.map do |food_truck|
       food_truck.inventory.each do |item, v|
-        errythang[item] = {total: 0, vendors: []} unless errythang.has_key?(item)
+        errythang[item] = {total: 0, food_trucks: []} unless errythang.has_key?(item)
         errythang[item][:total] += food_truck.inventory[item]
-        errythang[item][:vendors] << food_truck.name unless errythang[item].has_key?(food_truck) 
+        errythang[item][:food_trucks] << food_truck.name unless errythang[item].has_key?(food_truck) 
       end
     end
     errythang
@@ -44,8 +44,18 @@ class Event
   def overstocked_items
     too_many = []
     total_inventory.each do |item, val|
-      too_many << item if val[:total] > 50 && val[:vendors].length > 1
+      too_many << item if val[:total] > 50 && val[:food_trucks].length > 1
     end
     too_many
+  end
+
+  def sorted_item_list 
+    item_names = []
+    @food_trucks.each do |vendor|
+      vendor.inventory.each do |item, value|
+        item_names << item.name
+      end
+    end
+    item_names.sort
   end
 end

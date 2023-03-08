@@ -91,7 +91,6 @@ RSpec.describe Event do
     @event.add_food_truck(@food_truck1)
     @event.add_food_truck(@food_truck2)
     @event.add_food_truck(@food_truck3)
-    require 'pry'; binding.pry
     expect(@event.sorted_item_list).to be_a Array
     expect(@event.sorted_item_list).to eq(["Apple Pie (Slice)", "Banana Nice Cream", "Peach Pie (Slice)", "Peach Pie (Slice)", "Peach-Raspberry Nice Cream"])
   end
