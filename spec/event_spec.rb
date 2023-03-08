@@ -14,7 +14,7 @@ RSpec.describe Event do
       name: 'Apple Pie (Slice)', 
       price: '$2.50'
       })
-    @@item3 = Item.new({
+    @item3 = Item.new({
       name: "Peach-Raspberry Nice Cream", 
       price: "$5.30"
     })
@@ -23,6 +23,7 @@ RSpec.describe Event do
       price: "$4.25"
       })
     @food_truck1.stock(@item1, 35)
+    @food_truck1.stock(@item2, 7) 
     @food_truck2.stock(@item4, 50)
     @food_truck2.stock(@item3, 25)
     @food_truck3.stock(@item1, 65)
