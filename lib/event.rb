@@ -1,10 +1,14 @@
+require 'date'
+
 class Event
   attr_reader :name, 
-              :food_trucks
+              :food_trucks, 
+              :date
   
   def initialize(name)
     @name = name
     @food_trucks = []
+    @date = Date.today
   end
 
   def add_food_truck(food_truck)
@@ -35,7 +39,7 @@ class Event
       food_truck.inventory.each do |item, v|
         errythang[item] = {total: 0, food_trucks: []} unless errythang.has_key?(item)
         errythang[item][:total] += food_truck.inventory[item]
-        errythang[item][:food_trucks] << food_truck.name unless errythang[item].has_key?(food_truck) 
+        errythang[item][:food_trucks] << food_truck.name unless errythang[item].has_key?(food_truck) || errythang[item].has_value?(0)
       end
     end
     errythang
