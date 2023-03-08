@@ -26,14 +26,18 @@ RSpec.describe Event do
     @food_truck2.stock(@item4, 50)
     @food_truck2.stock(@item3, 25)
     @food_truck3.stock(@item1, 65)
-    @event.add_food_truck(@food_truck1)
-    @event.add_food_truck(@food_truck2)
-    @event.add_food_truck(@food_truck3)
   end
 
   it 'exists & has attr' do
     expect(@event).to be_a Event
     expect(@event.name).to eq("South Pearl Street Farmers Market")
     expect(@event.food_trucks).to eq([])
+  end
+
+  it 'adds food trucks' do
+    @event.add_food_truck(@food_truck1)
+    @event.add_food_truck(@food_truck2)
+    @event.add_food_truck(@food_truck3)
+    expect(@event.food_trucks).to eq([@food_truck1, @food_truck2, @food_truck3])
   end
 end
